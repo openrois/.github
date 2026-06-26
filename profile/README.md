@@ -19,9 +19,9 @@ distributed AI service without code changes.
 |----------|-------------|
 | **RoIS Interfaces** | Transport-independent types derived from the OMG IDL. Authored as Python (Pydantic), exported to JSON Schema, generated into C# and TypeScript. |
 | **RoIS Engine + Gateway** | Bus-independent runtime (Python) that manages components and exposes them remotely over WebSocket. |
-| **RoIS BusAdapters** | Pluggable bindings: ROS 2 (robot), InProcess (avatar), gRPC (services). All implement one four-method contract. |
+| **RoIS BusAdapters** | Pluggable bindings: ROS 2 (robot), InProcess (avatar), gRPC (services). All implement one five-method contract. |
 | **RoIS Components** | The 17 basic HRI components with per-paradigm backends (YOLO, MediaPipe, Whisper, Nav2, Piper). |
-| **RoIS Client SDKs** | C# for Unity (primary), TypeScript for web, Python for scripting. Identical behavior regardless of host paradigm. |
+| **RoIS Client SDKs** | TypeScript for web (primary), C# for Unity, Python for scripting. Identical behavior regardless of host paradigm. |
 
 ## Architecture at a glance
 
@@ -39,7 +39,7 @@ flowchart TB
     end
 
     subgraph L3["BusAdapter"]
-        Bus["discover, invoke,<br/>query, subscribe"]
+        Bus["discover, invoke,<br/>query, subscribe, unsubscribe"]
     end
 
     subgraph L4["Hosts"]
@@ -65,7 +65,7 @@ avatars, and distributed services. Only the BusAdapter and host layout change.
   detected, count: 2"), not raw sensor data. Hardware-specific concerns are hidden
   behind standardized interfaces.
 - **Paradigm-neutral core.** The engine, gateway, and SDK depend only on a
-  four-method `BusAdapter` contract. Adding a new paradigm is an additive adapter,
+  five-method `BusAdapter` contract. Adding a new paradigm is an additive adapter,
   never a rewrite.
 - **Single source of truth for types.** Python Pydantic models are the source. JSON
   Schema is the canonical wire format. C# and TypeScript types are generated, never
