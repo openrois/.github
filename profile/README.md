@@ -18,8 +18,8 @@ distributed AI service without code changes.
 | Artifact | Description |
 |----------|-------------|
 | **RoIS Interfaces** | Transport-independent types derived from the OMG IDL. Authored as Python (Pydantic), exported to JSON Schema, generated into C# and TypeScript. |
-| **RoIS Engine** | Control-plane router (TypeScript, Node.js) that routes RoIS calls to sub-engines over WebSocket + JSON-RPC. Zero media imports, zero WebRTC, embeddable module. |
-| **RoIS Sub-engines** | Standalone processes that host components and connect to the engine via WebSocket. Each owns its paradigm-specific transport (DDS, gRPC, animation API). |
+| **RoIS Engine** | Recursive control-plane engine (Python `openrois_core`, planned). One `Engine` class used by both gateway and adapters. TypeScript POC exists today. Zero media imports, zero WebRTC. |
+| **RoIS Adapters** | Standalone processes that host an `Engine` (sub-engine) with local components and connect to the gateway via WebSocket. Each owns its paradigm-specific transport (DDS, gRPC, IPC). |
 | **RoIS Components** | The 17 basic HRI components with per-paradigm backends (YOLO, MediaPipe, Whisper, Nav2, Piper). |
 | **RoIS Client SDKs** | TypeScript for web (primary), C# for Unity, Python for scripting. Identical behavior regardless of host paradigm. |
 
@@ -75,8 +75,9 @@ protocols.
   detected, count: 2"), not raw sensor data. Hardware-specific concerns are hidden
   behind standardized interfaces.
 - **Paradigm-neutral core.** The engine and SDK depend only on a five-method
-  `SubEngine` interface (discover, invoke, query, subscribe, unsubscribe). Adding a
-  new paradigm is an additive sub-engine, never a rewrite.
+  `Component Contract` (discover, invoke, query, subscribe, unsubscribe). Adding a
+  new paradigm is an additive adapter, never a rewrite. The adapter IS an engine
+  (a sub-engine), not a separate kind of process.
 - **Single source of truth for types.** Python Pydantic models are the source. JSON
   Schema is the canonical wire format. C# and TypeScript types are generated, never
   hand-written.
@@ -88,21 +89,25 @@ protocols.
 
 ## Status
 
-**Alpha, pre-1.0, unstable API.** The interface types (M0) are complete and stable.
-The engine, sub-engines, components, and SDKs are under construction.
+**Alpha, pre-1.0, unstable API.** Phases 0 to 3 are complete: the type pipeline,
+engine (TypeScript POC), adapter framework, reference components, and all three
+client SDKs are built and working against a real robot. The recursive core refactor
+(migration to Python `openrois_core`) is the next phase.
 
-| Milestone | Theme | Status |
-|-----------|-------|--------|
-| M0 | Paradigm-Neutral Interfaces | DONE |
-| M1 | Engine and Sub-engine | DONE |
-| M2 | Remote Engine | DONE |
-| M3 | ROS 2 Sub-engine | DONE |
-| M4 | Mock ROS 2 Robot Components | TODO |
-| M5 | SDK and Robot MVP (v0.1.0) | DONE |
-| M8 | Real Component and Mixed Paradigm | TODO |
-| M9 | Auth and Security | TODO |
-| M10 | WebRTC Media | TODO |
-| M11 | Full Component Library (v1.0) | TODO |
+| Phase | Theme | Status |
+|-------|-------|--------|
+| 0 | Paradigm-Neutral Interfaces | DONE |
+| 1 | Engine and Sub-engine (TypeScript POC) | DONE |
+| 2 | Adapter Framework and Components | DONE |
+| 3 | Client SDKs and MVP (v0.1.0) | DONE |
+| 4 | Recursive Core Refactor (Python `openrois_core`) | TODO |
+| 5 | Solidify the Core | TODO |
+| 6 | Gateway Process | TODO |
+| 7 | Adapter Process | TODO |
+| 8 | Real Component and Mixed Paradigm | TODO |
+| 9 | Auth, Security, Media | TODO |
+| 10 | Full Component Library (v1.0) | TODO |
+| 11 | Hub and Component Marketplace | PARKED |
 
 <!-- ## Repositories
 
@@ -115,7 +120,7 @@ The engine, sub-engines, components, and SDKs are under construction.
 
 - [White paper](https://github.com/openrois/openrois/blob/main/docs/white-paper.md) - architecture, design decisions, wire protocol, and deployment topologies
 - [Architecture](https://github.com/openrois/openrois/blob/main/docs/architecture.md) - engineering design document
-- [Roadmap](https://github.com/openrois/openrois/blob/main/docs/roadmap.md) - milestone roadmap
+- [Roadmap](https://github.com/openrois/openrois/blob/main/docs/roadmap.md) - phase roadmap
 - [RoIS reference](https://github.com/openrois/openrois/blob/main/docs/rois-reference.md) - OMG specification summary
 
 ## Community
