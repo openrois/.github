@@ -97,7 +97,8 @@ in the open.
 | C# client SDK for Unity | Available |
 | Open reference platform based on the Pollen Robotics Reachy Mini | Planned |
 | Authentication (JWT), authorization (RBAC), and TLS at the gateway | Available, off by default |
-| Streaming Interface with WebRTC media | Planned |
+| Streaming Interface control plane (`rois.stream.*`) | Available |
+| WebRTC media on the data plane (signaling through streaming components) | Planned |
 | Packages on PyPI, npm, NuGet, and the Unity Package Manager | Planned |
 | All 17 basic RoIS HRI Components (v1.0) | Planned |
 
