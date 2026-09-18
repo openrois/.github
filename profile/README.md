@@ -7,7 +7,7 @@
 <h1 align="center">OpenRoIS</h1>
 
 <p align="center">
-  <strong>Open-source middleware implementing the OMG Robotic Interaction Service (RoIS) Framework 2.0</strong><br>
+  <strong>A community-driven open-source middleware implementing the OMG Robotic Interaction Service (RoIS) Framework 2.0</strong><br>
   Write a service application once. Run it on physical robots, virtual avatars, and AI services.
 </p>
 
@@ -40,8 +40,8 @@ platform-independent interfaces and exchange symbolic messages such as
 "a person was detected" or "navigate to the kitchen".
 
 A specification alone does not provide the maintained implementation, SDKs, and
-adapters that adoption requires. **OpenRoIS is that implementation**, developed in
-the open under the Apache-2.0 license.
+adapters that adoption requires. **OpenRoIS is that implementation**: community-driven,
+open-source, and released under the Apache-2.0 license.
 
 <p align="center">
   <picture>
@@ -66,7 +66,7 @@ the open under the Apache-2.0 license.
   with tests that check them against the normative RoIS machine-readable files
   (not redistributed, so those tests run only where the OMG files are present).
 - **SDKs for every side of the system:** TypeScript for web applications, C# for
-  Unity (in progress), and a Python adapter SDK with ROS 2 support.
+  Unity and .NET, and a Python adapter SDK with ROS 2 support.
 
 <p align="center">
   <picture>
@@ -94,10 +94,11 @@ in the open.
 | Recursive engine, WebSocket server and client, and adapter SDK (Python) | Available, hardening |
 | TypeScript client SDK and web component inspector | Available |
 | Reference components for the Preferred Robotics Kachaka (gRPC and ROS 2) | Available |
-| C# client SDK for Unity | In progress |
-| Open reference platform based on the Pollen Robotics Reachy Mini | Planned |
-| Authentication (JWT) and authorization (RBAC) | Planned |
-| Streaming Interface with WebRTC media | Planned |
+| C# client SDK for Unity | Available |
+| Open reference platform based on the Pollen Robotics Reachy Mini | In progress, simulated first |
+| Authentication (JWT), authorization (RBAC), and TLS at the gateway | Available, off by default |
+| Streaming Interface control plane (`rois.stream.*`) | Available |
+| WebRTC media on the data plane (signaling through streaming components) | Planned |
 | Packages on PyPI, npm, NuGet, and the Unity Package Manager | Planned |
 | All 17 basic RoIS HRI Components (v1.0) | Planned |
 
