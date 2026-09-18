@@ -1,137 +1,120 @@
-# OpenRoIS - An Open-Source Middleware for the OMG RoIS Framework 2.0
+<p align="center">
+  <a href="https://openrois.org/">
+    <img src="assets/openrois-logo.svg" alt="OpenRoIS logo" width="96" height="96">
+  </a>
+</p>
 
-[![RoIS Specification](https://img.shields.io/badge/RoIS%20Specification-2.0%20beta%202-2376BC)](https://www.omg.org/spec/RoIS/2.0/Beta2)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Status](https://img.shields.io/badge/status-alpha-orange)](#status)
+<h1 align="center">OpenRoIS</h1>
 
-**Paradigm-neutral middleware for controlling robots, avatars, and digital agents over the internet.**
+<p align="center">
+  <strong>Open-source middleware implementing the OMG Robotic Interaction Service (RoIS) Framework 2.0</strong><br>
+  Write a service application once. Run it on physical robots, virtual avatars, and AI services.
+</p>
 
-OpenRoIS is an open-source middleware implementing the
-[OMG RoIS Framework 2.0](https://www.omg.org/spec/RoIS/2.0/Beta2) specification. It lets
-service applications control **physical robots, virtual avatars, and digital
-agents** through a single, paradigm-neutral SDK. The host paradigm is hidden behind
-the engine. A scenario written once can drive a ROS 2 robot, a Unity avatar, or a
-distributed AI service without code changes.
+<p align="center">
+  <a href="https://www.omg.org/spec/RoIS/2.0"><img src="https://img.shields.io/badge/OMG%20RoIS-2.0-0070C0" alt="OMG RoIS 2.0"></a>
+  <img src="https://img.shields.io/badge/paper-arXiv%20(coming%20soon)-B31B1B?logo=arxiv&logoColor=white" alt="Paper on arXiv, Coming Soon">
+  <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache--2.0-2E5C8A" alt="License: Apache-2.0"></a>
+  <a href="https://github.com/openrois/openrois"><img src="https://img.shields.io/badge/status-alpha-A6821A" alt="Status: alpha"></a>
+  <a href="https://openrois.org/"><img src="https://img.shields.io/badge/website-openrois.org-4E7A38" alt="Website: openrois.org"></a>
+</p>
 
-## What we are building
-
-| Artifact | Description |
-|----------|-------------|
-| **RoIS Interfaces** | Transport-independent types derived from the OMG IDL. Authored as Python (Pydantic), exported to JSON Schema, generated into C# and TypeScript. |
-| **RoIS Engine** | Recursive control-plane engine (Python `openrois_core`, planned). One `Engine` class used by both gateway and adapters. TypeScript POC exists today. Zero media imports, zero WebRTC. |
-| **RoIS Adapters** | Standalone processes that host an `Engine` (sub-engine) with local components and connect to the gateway via WebSocket. Each owns its paradigm-specific transport (DDS, gRPC, IPC). |
-| **RoIS Components** | The 17 basic HRI components with per-paradigm backends (YOLO, MediaPipe, Whisper, Nav2, Piper). |
-| **RoIS Client SDKs** | TypeScript for web (primary), C# for Unity, Python for scripting. Identical behavior regardless of host paradigm. |
-
-## Architecture at a glance
-
-```mermaid
-flowchart TB
-    subgraph L1["Service Application"]
-        App["Web, Unity, or Python client"]
-    end
-
-    subgraph L2["Engine"]
-        direction TB
-        Router["RoIS Router"]
-        Registry["Component Registry"]
-        Session["Session Manager"]
-        Auth["Auth"]
-    end
-
-    subgraph Robot["Sub-engine (ROS 2 Robot)"]
-        direction LR
-        SysInfo["System Information"]
-        Nav["Navigation"]
-        Detect["Person Detection"]
-    end
-    subgraph Avatar["Sub-engine (Virtual Avatar)"]
-        direction LR
-        AvatarSys["System Information"]
-        Speech["Speech Synthesis"]
-        Face["Face Detection"]
-    end
-    subgraph AIService["Sub-engine (gRPC Service)"]
-        direction LR
-        AISys["System Information"]
-        ASR["Speech Recognition"]
-        Ident["Person Identification"]
-    end
-
-    L1 --> L2
-    L2 --> Robot
-    L2 --> Avatar
-    L2 --> AIService
-```
-
-All three layers communicate over WebSocket + JSON-RPC 2.0. Each sub-engine
-registers its components in a profile (`openrois-profile.yaml`) and owns its
-internal transport (DDS, gRPC, IPC), keeping the engine free of paradigm-specific
-protocols.
-
-## Key ideas
-
-- **Symbolic level interaction.** Applications exchange structured messages ("person
-  detected, count: 2"), not raw sensor data. Hardware-specific concerns are hidden
-  behind standardized interfaces.
-- **Paradigm-neutral core.** The engine and SDK depend only on a five-method
-  `Component Contract` (discover, invoke, query, subscribe, unsubscribe). Adding a
-  new paradigm is an additive adapter, never a rewrite. The adapter IS an engine
-  (a sub-engine), not a separate kind of process.
-- **Single source of truth for types.** Python Pydantic models are the source. JSON
-  Schema is the canonical wire format. C# and TypeScript types are generated, never
-  hand-written.
-- **Engine has zero media imports.** The engine is a pure control-plane router. It
-  never touches WebRTC, never touches media data. Media flows directly between
-  publisher and consumer.
-- **The SDK is the product.** Adoption is driven by how easy it is to write a
-  scenario. The SDK is identical whether the host is a robot or an avatar.
-
-## Status
-
-**Alpha, pre-1.0, unstable API.** Phases 0 to 3 are complete: the type pipeline,
-engine (TypeScript POC), adapter framework, reference components, and all three
-client SDKs are built and working against a real robot. The recursive core refactor
-(migration to Python `openrois_core`) is the next phase.
-
-| Phase | Theme | Status |
-|-------|-------|--------|
-| 0 | Paradigm-Neutral Interfaces | DONE |
-| 1 | Engine and Sub-engine (TypeScript POC) | DONE |
-| 2 | Adapter Framework and Components | DONE |
-| 3 | Client SDKs and MVP (v0.1.0) | DONE |
-| 4 | Recursive Core Refactor (Python `openrois_core`) | TODO |
-| 5 | Solidify the Core | TODO |
-| 6 | Gateway Process | TODO |
-| 7 | Adapter Process | TODO |
-| 8 | Real Component and Mixed Paradigm | TODO |
-| 9 | Auth, Security, Media | TODO |
-| 10 | Full Component Library (v1.0) | TODO |
-| 11 | Hub and Component Marketplace | PARKED |
-
-<!-- ## Repositories
-
-| Repo | Description |
-|------|-------------|
-| [openrois](https://github.com/openrois/openrois) | Core middleware: interfaces, engine, sub-engines, components, SDKs |
-| [openrois-internal](https://github.com/openrois/openrois-internal) | Internal documentation: plans, architecture, branding, internship materials | -->
-
-## Documentation
-
-- [White paper](https://github.com/openrois/openrois/blob/main/docs/white-paper.md) - architecture, design decisions, wire protocol, and deployment topologies
-- [Architecture](https://github.com/openrois/openrois/blob/main/docs/architecture.md) - engineering design document
-- [Roadmap](https://github.com/openrois/openrois/blob/main/docs/roadmap.md) - phase roadmap
-- [RoIS reference](https://github.com/openrois/openrois/blob/main/docs/rois-reference.md) - OMG specification summary
-
-## Community
-
-- **License:** Apache-2.0
-- **Spec:** [OMG RoIS Framework 2.0](https://www.omg.org/spec/RoIS/2.0/Beta2)
-<!-- - **Contributions:** Welcome. Reference components are the natural entry point for
-  new contributors. See the roadmap for parallelizable work items. -->
+<p align="center">
+  <a href="https://openrois.org/">Website</a> ·
+  <a href="https://github.com/openrois">OpenRoIS GitHub Organization</a> ·
+  OpenRoIS arXiv Preprint (coming soon) ·
+  <a href="https://www.omg.org/spec/RoIS/2.0">OMG RoIS Specification</a> ·
+  <a href="https://github.com/openrois/openrois/tree/dev/docs">Documentation</a> ·
+  <a href="https://github.com/openrois/openrois/blob/dev/docs/roadmap.md">Roadmap</a>
+</p>
 
 ---
 
-*OpenRoIS is an open-source middleware for the OMG RoIS Framework 2.0. Control
-robots, avatars, and digital agents from one paradigm-neutral SDK. Apache-2.0.
-Alpha, pre-1.0, unstable API.*
+## Why OpenRoIS
+
+Service applications for human-robot interaction are usually written against the
+hardware-specific interface of one platform, so every change of hardware forces a
+rewrite. The [OMG RoIS Framework 2.0](https://www.omg.org/spec/RoIS/2.0) solves this
+at the level of the standard: applications talk to HRI Engines through five
+platform-independent interfaces and exchange symbolic messages such as
+"a person was detected" or "navigate to the kitchen".
+
+A specification alone does not provide the maintained implementation, SDKs, and
+adapters that adoption requires. **OpenRoIS is that implementation**, developed in
+the open under the Apache-2.0 license.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/openrois-concept-dark.svg">
+    <img src="assets/openrois-concept.svg" alt="Without a standard interface, N applications and M platforms need N times M integrations. With OpenRoIS, they need N plus M." width="820">
+  </picture>
+</p>
+
+## What OpenRoIS Provides
+
+- **A recursive engine.** One `Engine` class realizes both the main and the sub HRI
+  Engine roles of RoIS, so the gateway and every adapter share a single dispatch
+  implementation.
+- **A five-method Component Contract** (`discover`, `invoke`, `query`, `subscribe`,
+  `unsubscribe`) that keeps the engine independent of ROS 2, gRPC, game engines, or
+  any other middleware.
+- **A JSON-RPC 2.0 mapping of the five RoIS interfaces** over WebSocket
+  (`rois.system`, `rois.command`, `rois.query`, `rois.event`, `rois.stream`),
+  usable from browsers and across the internet.
+- **A single-source-of-truth type pipeline.** RoIS types are authored once as Python
+  Pydantic models, exported to JSON Schema, and generated into TypeScript and C#,
+  with tests that check them against the normative RoIS machine-readable files
+  (not redistributed, so those tests run only where the OMG files are present).
+- **SDKs for every side of the system:** TypeScript for web applications, C# for
+  Unity (in progress), and a Python adapter SDK with ROS 2 support.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/openrois-architecture-dark.svg">
+    <img src="assets/openrois-architecture.svg" alt="OpenRoIS architecture: service applications, the gateway hosting the main HRI Engine, adapters hosting sub HRI Engines, and their hosts." width="820">
+  </picture>
+</p>
+
+## Repositories
+
+| Repository | Description |
+|------------|-------------|
+| [**openrois**](https://github.com/openrois/openrois) | Core middleware: interface types, recursive engine, adapter SDK, reference components, client SDKs, and examples |
+| [**openrois-docs**](https://github.com/openrois/openrois-docs) | Source of the [openrois.org](https://openrois.org/) website and documentation |
+
+## Project Status
+
+OpenRoIS is **alpha, pre-1.0, with an unstable API**. The foundations are in place
+and demonstrated with a physical robot. The rest of the RoIS surface is being built
+in the open.
+
+| Area | Status |
+|------|--------|
+| RoIS interface types (Python, JSON Schema, TypeScript, C#) | Available |
+| Recursive engine, WebSocket server and client, and adapter SDK (Python) | Available, hardening |
+| TypeScript client SDK and web component inspector | Available |
+| Reference components for the Preferred Robotics Kachaka (gRPC and ROS 2) | Available |
+| C# client SDK for Unity | In progress |
+| Open reference platform based on the Pollen Robotics Reachy Mini | Planned |
+| Authentication (JWT) and authorization (RBAC) | Planned |
+| Streaming Interface with WebRTC media | Planned |
+| Packages on PyPI, npm, NuGet, and the Unity Package Manager | Planned |
+| All 17 basic RoIS HRI Components (v1.0) | Planned |
+
+See the [roadmap](https://github.com/openrois/openrois/blob/dev/docs/roadmap.md) for
+the full plan.
+
+## Get Involved
+
+Contributions are welcome, and reference components for new robots are the natural
+entry point. Read the
+[contributing guide](https://github.com/openrois/openrois/blob/dev/CONTRIBUTING.md),
+browse the [open issues](https://github.com/openrois/openrois/issues), or open a new
+one to discuss an idea.
+
+## License
+
+OpenRoIS is released under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+It is stewarded by [Coarobo GK](https://coarobo.com/) and developed with the
+OpenRoIS community. OpenRoIS is a trademark of Coarobo GK. RoIS is a trademark of the
+Object Management Group.
