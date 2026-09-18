@@ -66,7 +66,7 @@ open-source, and released under the Apache-2.0 license.
   with tests that check them against the normative RoIS machine-readable files
   (not redistributed, so those tests run only where the OMG files are present).
 - **SDKs for every side of the system:** TypeScript for web applications, C# for
-  Unity (in progress), and a Python adapter SDK with ROS 2 support.
+  Unity and .NET, and a Python adapter SDK with ROS 2 support.
 
 <p align="center">
   <picture>
@@ -94,7 +94,7 @@ in the open.
 | Recursive engine, WebSocket server and client, and adapter SDK (Python) | Available, hardening |
 | TypeScript client SDK and web component inspector | Available |
 | Reference components for the Preferred Robotics Kachaka (gRPC and ROS 2) | Available |
-| C# client SDK for Unity | In progress |
+| C# client SDK for Unity | Available |
 | Open reference platform based on the Pollen Robotics Reachy Mini | Planned |
 | Authentication (JWT), authorization (RBAC), and TLS at the gateway | Available, off by default |
 | Streaming Interface with WebRTC media | Planned |
