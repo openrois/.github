@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="https://www.omg.org/spec/RoIS/2.0"><img src="https://img.shields.io/badge/OMG%20RoIS-2.0-0070C0" alt="OMG RoIS 2.0"></a>
-  <img src="https://img.shields.io/badge/paper-arXiv%20(coming%20soon)-B31B1B?logo=arxiv&logoColor=white" alt="Paper on arXiv, Coming Soon">
+  <a href="https://arxiv.org/abs/2609.21178"><img src="https://img.shields.io/badge/paper-arXiv%3A2609.21178-B31B1B?logo=arxiv&logoColor=white" alt="Paper on arXiv: 2609.21178"></a>
   <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache--2.0-2E5C8A" alt="License: Apache-2.0"></a>
   <a href="https://github.com/openrois/openrois"><img src="https://img.shields.io/badge/status-alpha-A6821A" alt="Status: alpha"></a>
   <a href="https://openrois.org/"><img src="https://img.shields.io/badge/website-openrois.org-4E7A38" alt="Website: openrois.org"></a>
@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://openrois.org/">Website</a> ·
   <a href="https://github.com/openrois">OpenRoIS GitHub Organization</a> ·
-  OpenRoIS arXiv Preprint (coming soon) ·
+  <a href="https://arxiv.org/abs/2609.21178">OpenRoIS arXiv Preprint</a> ·
   <a href="https://www.omg.org/spec/RoIS/2.0">OMG RoIS Specification</a> ·
   <a href="https://github.com/openrois/openrois/tree/dev/docs">Documentation</a> ·
   <a href="https://github.com/openrois/openrois/blob/dev/docs/roadmap.md">Roadmap</a>
