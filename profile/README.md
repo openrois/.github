@@ -65,8 +65,8 @@ open-source, and released under the Apache-2.0 license.
   Pydantic models, exported to JSON Schema, and generated into TypeScript and C#,
   with tests that check them against the normative RoIS machine-readable files
   (not redistributed, so those tests run only where the OMG files are present).
-- **SDKs for every side of the system:** TypeScript for web applications, C# for
-  Unity and .NET, and a Python adapter SDK with ROS 2 support.
+- **SDKs for every side of the system:** client SDKs for JavaScript, Python and Unity,
+  released as alphas on npm, PyPI and by Git URL, and a Python component SDK for adapters.
 
 <p align="center">
   <picture>
@@ -90,16 +90,21 @@ in the open.
 
 | Area | Status |
 |------|--------|
-| RoIS interface types (Python, JSON Schema, TypeScript, C#) | Available |
-| Recursive engine, WebSocket server and client, and adapter SDK (Python) | Available, hardening |
-| TypeScript client SDK and web component inspector | Available |
-| Reference components for the Preferred Robotics Kachaka (gRPC and ROS 2) | Available |
-| C# client SDK for Unity | Available |
-| Open reference platform based on the Pollen Robotics Reachy Mini | In progress, simulated first |
-| Authentication (JWT), authorization (RBAC), and TLS at the gateway | Available, off by default |
-| Streaming Interface control plane (`rois.stream.*`) | Available |
-| WebRTC media on the data plane (signaling through streaming components) | Planned |
-| Packages on PyPI, npm, NuGet, and the Unity Package Manager | Planned |
+| RoIS interface types (Python, JSON Schema, TypeScript, C#) and the XML profile codec (Python) | Available |
+| Recursive engine with the RoIS behavior of CP1 to CP3, WebSocket server and client | Available, hardening |
+| Component and adapter SDK (Python): decorators, resources, RoIS_Common default, `adapter.yaml` | Available |
+| Gateway process, container image, and Docker Compose with a mock adapter | Available |
+| JavaScript client SDK and web inspector | Alpha, pre-1.0, unstable API |
+| Python client SDK | Alpha, pre-1.0, unstable API |
+| Unity client SDK | Alpha, pre-1.0, unstable API. Run in Linux players and the Editor. The Android build has not run on a device, and iOS has not been built |
+| Open reference platform based on the Pollen Robotics Reachy Mini | In progress, in openrois-adapter-reachy-mini |
+| Loading XML-declared component profiles at run time | Planned |
+| Authentication (JWT) and authorization (RBAC) | Planned |
+| Streaming: AudioStreaming and VideoStreaming profiles | Available, no streaming component ships yet |
+| WebRTC media for the streaming components | Planned |
+| Alpha packages on PyPI (`openrois-interfaces`, `openrois-engine`, `openrois-components-core`, `openrois-gateway`) and npm (`@openrois/interfaces`) | Available |
+| First alpha of the client SDKs: `@openrois/sdk` on npm, `openrois-sdk` on PyPI, `org.openrois.sdk` by Git URL | Available |
+| `openrois-components-common` on PyPI, the Unity package in a registry | Planned |
 | All 17 basic RoIS HRI Components (v1.0) | Planned |
 
 See the [roadmap](https://github.com/openrois/openrois/blob/dev/docs/roadmap.md) for
