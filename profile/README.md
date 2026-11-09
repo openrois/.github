@@ -88,24 +88,14 @@ OpenRoIS is **alpha, pre-1.0, with an unstable API**. The foundations are in pla
 and demonstrated with a physical robot. The rest of the RoIS surface is being built
 in the open.
 
-| Area | Status |
-|------|--------|
-| RoIS interface types (Python, JSON Schema, TypeScript, C#) and the XML profile codec (Python) | Available |
-| Recursive engine with the RoIS behavior of CP1 to CP3, WebSocket server and client | Available, hardening |
-| Component and adapter SDK (Python): decorators, resources, RoIS_Common default, `adapter.yaml` | Available |
-| Gateway process, container image, and Docker Compose with a mock adapter | Available |
-| JavaScript client SDK and web inspector | Alpha, pre-1.0, unstable API |
-| Python client SDK | Alpha, pre-1.0, unstable API |
-| Unity client SDK | Alpha, pre-1.0, unstable API. Run in Linux players and the Editor. The Android build has not run on a device, and iOS has not been built |
-| Open reference platform based on the Pollen Robotics Reachy Mini | In progress, in openrois-adapter-reachy-mini |
-| Loading XML-declared component profiles at run time | Planned |
-| Authentication (JWT) and authorization (RBAC) | Planned |
-| Streaming: AudioStreaming and VideoStreaming profiles | Available, no streaming component ships yet |
-| Media for the streaming components, transport-neutral, with an optional WebRTC integration | Planned |
-| Alpha packages on PyPI (`openrois-interfaces`, `openrois-engine`, `openrois-components-core`, `openrois-gateway`) and npm (`@openrois/interfaces`) | Available |
-| First alpha of the client SDKs: `@openrois/sdk` on npm, `openrois-sdk` on PyPI, `org.openrois.sdk` by Git URL | Available |
-| `openrois-components-common` on PyPI, the Unity package in a registry | Planned |
-| All 17 basic RoIS HRI Components (v1.0) | Planned |
+| Milestone | Status | What it delivers |
+|-----------|--------|------------------|
+| **`v0.1.0`** (November 2026) | ![Released](https://img.shields.io/badge/Released-2E7D32) | Every package at `0.1.0`, released together. A physical Reachy Mini and a simulated one behind one gateway, driven by one application and by an AI agent |
+| **`v0.2`** | ![Planned](https://img.shields.io/badge/Planned-6E7781) | A physical robot and a virtual agent behind one gateway, controlled by one application that does not know which is which. Components declared by XML profiles at run time, and a RoIS conformance claim |
+| **`v0.3`** | ![Planned](https://img.shields.io/badge/Planned-6E7781) | Authentication at the WebSocket upgrade and authorization per RoIS operation. Until then, a reverse proxy in front of the gateway terminates TLS ([security policy](https://github.com/openrois/openrois/blob/dev/SECURITY.md)) |
+| **`v0.4`** | ![Planned](https://img.shields.io/badge/Planned-6E7781) | Media for the AudioStreaming and VideoStreaming components. OpenRoIS does not prescribe a media transport: a streaming component returns a descriptor of its stream, and an optional WebRTC integration serves deployments that have none |
+| **`v1.0`** | ![Planned](https://img.shields.io/badge/Planned-6E7781) | All 17 basic RoIS HRI Components, for physical robots and virtual agents. The first release with semantic versioning guarantees |
+| After `v1.0` | ![After 1.0](https://img.shields.io/badge/After%201.0-8B98A8) | A registry of community components and adapters, and a Hub that shows operators the adapters, sessions and health of a deployment |
 
 See the [roadmap](https://github.com/openrois/openrois/blob/dev/docs/roadmap.md) for
 the full plan.
