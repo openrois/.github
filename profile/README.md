@@ -8,7 +8,7 @@
 
 <p align="center">
   <strong>A community-driven open-source middleware implementing the OMG Robotic Interaction Service (RoIS) Framework 2.0</strong><br>
-  Write a service application once. Run it on physical robots, virtual avatars, and AI services.
+  Write a service application once. Run it on physical robots, digital avatars, and AI services.
 </p>
 
 <p align="center">
