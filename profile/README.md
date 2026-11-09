@@ -55,9 +55,9 @@ open-source, and released under the Apache-2.0 license.
 - **A recursive engine.** One `Engine` class realizes both the main and the sub HRI
   Engine roles of RoIS, so the gateway and every adapter share a single dispatch
   implementation.
-- **A five-method Component Contract** (`discover`, `invoke`, `query`, `subscribe`,
-  `unsubscribe`) that keeps the engine independent of ROS 2, gRPC, game engines, or
-  any other middleware.
+- **One RoIS protocol at every hop.** The RoIS method catalog runs from application to
+  gateway, from gateway to adapter, and from engine to component, which keeps the
+  engine independent of ROS 2, gRPC, game engines, or any other middleware.
 - **A JSON-RPC 2.0 mapping of the five RoIS interfaces** over WebSocket
   (`rois.system`, `rois.command`, `rois.query`, `rois.event`, `rois.stream`),
   usable from browsers and across the internet.
