@@ -8,7 +8,7 @@
 
 <p align="center">
   <strong>A community-driven open-source middleware implementing the OMG Robotic Interaction Service (RoIS) Framework 2.0</strong><br>
-  Write a service application once. Run it on physical robots, virtual avatars, and AI services.
+  Write a service application once. Run it on physical robots, virtual avatars, and digital services, or let an AI agent drive them.
 </p>
 
 <p align="center">
@@ -46,7 +46,7 @@ open-source, and released under the Apache-2.0 license.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/openrois-concept-dark.svg">
-    <img src="assets/openrois-concept.svg" alt="Without a standard interface, N applications and M platforms need N times M integrations. With OpenRoIS, they need N plus M." width="820">
+    <img src="assets/openrois-concept.svg" alt="With vendor-specific interfaces, N applications and M platforms, whether physical robots, virtual avatars, or digital services, need N times M integrations. With OpenRoIS, they need N plus M." width="820">
   </picture>
 </p>
 
@@ -58,9 +58,9 @@ open-source, and released under the Apache-2.0 license.
 - **One RoIS protocol at every hop.** The RoIS method catalog runs from application to
   gateway, from gateway to adapter, and from engine to component, which keeps the
   engine independent of ROS 2, gRPC, game engines, or any other middleware.
-- **A JSON-RPC 2.0 mapping of the five RoIS interfaces** over WebSocket
-  (`rois.system`, `rois.command`, `rois.query`, `rois.event`, `rois.stream`),
-  usable from browsers and across the internet.
+- **A JSON-RPC 2.0 mapping of the RoIS interfaces** over WebSocket
+  (`rois.system`, `rois.command`, `rois.query`, `rois.event`), usable from browsers
+  and across the internet. Streaming components are driven through the same four.
 - **A single-source-of-truth type pipeline.** RoIS types are authored once as Python
   Pydantic models, exported to JSON Schema, and generated into TypeScript and C#,
   with tests that check them against the normative RoIS machine-readable files
@@ -71,7 +71,7 @@ open-source, and released under the Apache-2.0 license.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/openrois-architecture-dark.svg">
-    <img src="assets/openrois-architecture.svg" alt="OpenRoIS architecture: service applications, the gateway hosting the main HRI Engine, adapters hosting sub HRI Engines, and their hosts." width="820">
+    <img src="assets/openrois-architecture.svg" alt="OpenRoIS architecture: service applications, among them an AI agent through the MCP server, the gateway hosting the main HRI Engine, adapters hosting sub HRI Engines for physical robots, virtual avatars, and digital services, and their hosts." width="820">
   </picture>
 </p>
 
@@ -79,7 +79,7 @@ open-source, and released under the Apache-2.0 license.
 
 | Repository | Description |
 |------------|-------------|
-| [**openrois**](https://github.com/openrois/openrois) | Core middleware: interface types, recursive engine, adapter SDK, reference components, client SDKs, and examples |
+| [**openrois**](https://github.com/openrois/openrois) | Core middleware: interface types, recursive engine, component SDK, reference components, client SDKs, and examples |
 | [**openrois-docs**](https://github.com/openrois/openrois-docs) | Source of the [openrois.org](https://openrois.org/) website and documentation |
 
 ## Project Status
